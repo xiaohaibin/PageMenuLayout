@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/home_entrance"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_home_entrance_vp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.stx.xhb.meituancategorydemo.widget.IndicatorView
+        android:id="@+id/main_home_entrance_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="bottom"
+        android:layout_marginRight="16dp"
+        app:gravity="0"
+        app:indicatorColor="#668b8989"
+        app:indicatorColorSelected="#FF5722"
+        app:indicatorWidth="6"/>
+
+</LinearLayout>
