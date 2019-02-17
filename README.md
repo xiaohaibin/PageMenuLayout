@@ -3,7 +3,10 @@ Android分页菜单控件，帮助你快速实现美团、饿了么、京东等�
 
 ![最终实现效果](http://upload-images.jianshu.io/upload_images/1956769-e357d3d1f829a1a9.gif?imageMogr2/auto-orient/strip)
 
-#### 布局中使用
+
+## 基本使用
+
+#### 1.布局中使用
 ```
 <?xml version="1.0" encoding="utf-8"?>
     <com.stx.xhb.pagemenulibrary.PageMenuLayout
@@ -14,7 +17,7 @@ Android分页菜单控件，帮助你快速实现美团、饿了么、京东等�
         app:pagemenu_span_count="4"/>
 
 ```
-#### 代码中使用
+#### 2.代码中使用
 ```
   private void initView() {
         entranceIndicatorView = findViewById(R.id.main_home_entrance_indicator);
@@ -80,5 +83,45 @@ Android分页菜单控件，帮助你快速实现美团、饿了么、京东等�
         });
     }
 ```
-以上就是实现首页分页菜单效果的主要实现代码，这种分页菜单效果在我们的应用中也比较常见，说不定啥时候公司产品汪就拿手机过来让你照着美团之类实现这种效果，demo地址如下，如果帮到了你，可以点个start，支持一下~~~~~~~
+
+## 自定义属性说明
+
+| 属性名 | 属性说明 | 属性值 | 
+| ------------ | ------------- | ------------ |
+| pagemenu_row_count| 菜单显示行数 | Integer类型，默认为2 |
+| pagemenu_span_count| 菜单显示列数 | Integer类型，默认为5|
+
+
+## 关于我
+
+* **Email**: <xhb_199409@163.com>
+* **Home**: <http://www.jxnk25.club>
+* **掘金**: <https://juejin.im/user/56fcba0a71cfe4005ca1a57b>
+* **简书**: <http://www.jianshu.com/users/42aed90cf5af/latest_articles>
+
+### Contract
+
+[QQ群:271127803](http://qm.qq.com/cgi-bin/qm/qr?k=cM-ytK5bbZZZ4v7S1fMrTDzkjlFT0C9K)
+
+![欢迎关注“大话微信”公众号](http://upload-images.jianshu.io/upload_images/1956769-2f49dcb0dc5195b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400)
+
+
+### 你的 Statr 是我最大的动力，谢谢~~~
+
+
+License
+--
+    Copyright (C) 2016 xhb_199409@163.com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
