@@ -2,13 +2,7 @@
 
 ![最终实现效果](http://upload-images.jianshu.io/upload_images/1956769-e357d3d1f829a1a9.gif?imageMogr2/auto-orient/strip)
 
-![美团首页分页菜单](http://upload-images.jianshu.io/upload_images/1956769-a5488ad88da53f28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
-
-![饿了么首页分页菜单](http://upload-images.jianshu.io/upload_images/1956769-9b21714999ddd994.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
-
-
 #### 布局中使用
-activity_main.xml
 ```
 <?xml version="1.0" encoding="utf-8"?>
     <com.stx.xhb.pagemenulibrary.PageMenuLayout
