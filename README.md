@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/xiaohaibin/PageMenuLayout.svg)](https://jitpack.io/#xiaohaibin/PageMenuLayout)
+
 ## PageMenuLayout
 Android分页菜单控件，帮助你快速实现美团、饿了么、京东等分页菜单效果。
 
@@ -6,7 +8,28 @@ Android分页菜单控件，帮助你快速实现美团、饿了么、京东等�
 
 ## 基本使用
 
-#### 1.布局中使用
+#### 1.添加 Gradle 依赖
+
+# Jitpack
+
+Add it in your root build.gradle at the end of repositories:
+```
+allprojects {
+     repositories {
+	...
+	maven { url 'https://jitpack.io' }
+     }
+}
+
+```
+Step 2. Add the dependency
+```
+dependencies {
+   implementation 'com.github.xiaohaibin:PageMenuLayout:latestVersion'//将latestVersion替换成上面 jitpack 后面的版本号
+}
+```
+
+#### 2.布局中使用
 ```
 <?xml version="1.0" encoding="utf-8"?>
     <com.stx.xhb.pagemenulibrary.PageMenuLayout
@@ -17,7 +40,7 @@ Android分页菜单控件，帮助你快速实现美团、饿了么、京东等�
         app:pagemenu_span_count="4"/>
 
 ```
-#### 2.代码中使用
+#### 3.代码中使用
 ```
   private void initView() {
         entranceIndicatorView = findViewById(R.id.main_home_entrance_indicator);
