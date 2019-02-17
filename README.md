@@ -1,4 +1,5 @@
-前段时间公司移动端App新增一个模块，类似美团团购的功能，首页有个类似美团的分页菜单的功能，用过美团和饿了么的app的童鞋应该清楚这一功能。首页菜单可以分页切换，类似我们的banner广告切换效果，只不过只能手动切换。所以整个分页效果，我们可以采用Viewpager实现，里面的菜单项我们则可以采用RecyclerView实现，动态改变里面的菜单项，以后产品汪要改需求也是一两行代码能搞定的事，是不是很机智。所以今天我们这个首页分页菜单效果，可以采用ViewPager+RecyclerView实现，思路既然已经有了，那我们就开整吧。首先我们先看下实现的效果图。
+## PageMenuLayout
+Android分页菜单控件，帮助你快速实现美团、饿了么、京东等分页菜单效果。
 
 ![最终实现效果](http://upload-images.jianshu.io/upload_images/1956769-e357d3d1f829a1a9.gif?imageMogr2/auto-orient/strip)
 
