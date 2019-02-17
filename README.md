@@ -47,7 +47,7 @@ dependencies {
         mPageMenuLayout = findViewById(R.id.pagemenu);
     }
 
-
+    //初始化数据
     private void initData() {
         homeEntrances = new ArrayList<>();
         homeEntrances.add(new ModelHomeEntrance("美食", R.mipmap.ic_category_0));
