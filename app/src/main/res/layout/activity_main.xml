@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/home_entrance"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/main_home_entrance_vp"
+    <com.stx.xhb.pagemenulibrary.PageMenuLayout
+        android:id="@+id/pagemenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:pagemenu_row_count="2"
+        app:pagemenu_span_count="4"/>
 
     <com.stx.xhb.meituancategorydemo.widget.IndicatorView
         android:id="@+id/main_home_entrance_indicator"
@@ -22,5 +23,6 @@
         app:indicatorColor="#668b8989"
         app:indicatorColorSelected="#FF5722"
         app:indicatorWidth="6"/>
+
 
 </LinearLayout>

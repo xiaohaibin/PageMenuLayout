@@ -5,26 +5,31 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.stx.xhb.meituancategorydemo.adapter.CagegoryViewPagerAdapter;
 import com.stx.xhb.meituancategorydemo.adapter.EntranceAdapter;
 import com.stx.xhb.meituancategorydemo.model.ModelHomeEntrance;
 import com.stx.xhb.meituancategorydemo.utils.ScreenUtil;
 import com.stx.xhb.meituancategorydemo.widget.IndicatorView;
+import com.stx.xhb.pagemenulibrary.PageMenuLayout;
+import com.stx.xhb.pagemenulibrary.holder.AbstractHolder;
+import com.stx.xhb.pagemenulibrary.holder.PageMenuViewHolderCreator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final int HOME_ENTRANCE_PAGE_SIZE = 10;//首页菜单单页显示数量
-    private ViewPager entranceViewPager;
-    private LinearLayout homeEntranceLayout;
     private List<ModelHomeEntrance> homeEntrances;
     private IndicatorView entranceIndicatorView;
+    private PageMenuLayout<ModelHomeEntrance> mPageMenuLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initView() {
-        homeEntranceLayout = (LinearLayout) findViewById(R.id.home_entrance);
-        entranceViewPager = (ViewPager) findViewById(R.id.main_home_entrance_vp);
-        entranceIndicatorView = (IndicatorView) findViewById(R.id.main_home_entrance_indicator);
+        entranceIndicatorView = findViewById(R.id.main_home_entrance_indicator);
+        mPageMenuLayout = findViewById(R.id.pagemenu);
     }
 
 
@@ -64,32 +68,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        LinearLayout.LayoutParams layoutParams12 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth() / 2.0f));
+        mPageMenuLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth() / 2.0f)));
+        mPageMenuLayout.setPageDatas(homeEntrances, new PageMenuViewHolderCreator() {
+            @Override
+            public AbstractHolder createHolder(View itemView) {
+                return new AbstractHolder<ModelHomeEntrance>(itemView) {
+                    private TextView entranceNameTextView;
+                    private ImageView entranceIconImageView;
 
-        //首页菜单分页
-        FrameLayout.LayoutParams entrancelayoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth() / 2.0f + 70));
-        homeEntranceLayout.setLayoutParams(entrancelayoutParams);
-        entranceViewPager.setLayoutParams(layoutParams12);
-        LayoutInflater inflater = LayoutInflater.from(this);
-        //将RecyclerView放至ViewPager中：
-        int pageSize = HOME_ENTRANCE_PAGE_SIZE;
-        //一共的页数等于 总数/每页数量，并取整。
-        int pageCount = (int) Math.ceil(homeEntrances.size() * 1.0 / pageSize);
-        List<View> viewList = new ArrayList<View>();
-        for (int index = 0; index < pageCount; index++) {
-            //每个页面都是inflate出一个新实例
-            RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.item_home_entrance_vp, entranceViewPager, false);
-            recyclerView.setLayoutParams(layoutParams12);
-            recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 5));
-            EntranceAdapter entranceAdapter = new EntranceAdapter(MainActivity.this, homeEntrances, index, HOME_ENTRANCE_PAGE_SIZE);
-            recyclerView.setAdapter(entranceAdapter);
-            viewList.add(recyclerView);
-        }
-        CagegoryViewPagerAdapter adapter = new CagegoryViewPagerAdapter(viewList);
-        entranceViewPager.setAdapter(adapter);
-        entranceIndicatorView.setIndicatorCount(entranceViewPager.getAdapter().getCount());
-        entranceIndicatorView.setCurrentIndicator(entranceViewPager.getCurrentItem());
-        entranceViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+                    @Override
+                    protected void initView(View itemView) {
+                        entranceIconImageView = itemView.findViewById(R.id.entrance_image);
+                        entranceNameTextView = itemView.findViewById(R.id.entrance_name);
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth() / 4.0f));
+                        itemView.setLayoutParams(layoutParams);
+                    }
+
+                    @Override
+                    public void bindView(RecyclerView.ViewHolder holder, final ModelHomeEntrance data, int pos) {
+                        entranceNameTextView.setText(data.getName());
+                        entranceIconImageView.setImageResource(data.getImage());
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, data.getName(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                };
+            }
+
+            @Override
+            public int getLayoutId() {
+                return R.layout.item_home_entrance;
+            }
+        });
+        entranceIndicatorView.setIndicatorCount(mPageMenuLayout.getPageCount());
+        mPageMenuLayout.setOnPageListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 entranceIndicatorView.setCurrentIndicator(position);

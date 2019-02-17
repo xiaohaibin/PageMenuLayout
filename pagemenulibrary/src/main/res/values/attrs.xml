@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PageMenuLayout">
+        <attr name="pagemenu_row_count" format="integer" />
+        <attr name="pagemenu_span_count" format="integer" />
+    </declare-styleable>
+</resources>

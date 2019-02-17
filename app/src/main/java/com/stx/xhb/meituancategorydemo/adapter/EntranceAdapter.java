@@ -1,6 +1,7 @@
 package com.stx.xhb.meituancategorydemo.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.stx.xhb.meituancategorydemo.R;
 import com.stx.xhb.meituancategorydemo.model.ModelHomeEntrance;
@@ -45,20 +47,20 @@ public class EntranceAdapter extends RecyclerView.Adapter<EntranceAdapter.Entran
     public EntranceAdapter(Context context, List<ModelHomeEntrance> datas, int index, int pageSize) {
         this.mContext = context;
         this.homeEntrances = datas;
-        mPageSize = pageSize;
-        mDatas = datas;
-        mIndex = index;
-        mLayoutInflater = LayoutInflater.from(context);
-
+        this.mPageSize = pageSize;
+        this.mDatas = datas;
+        this.mIndex = index;
+        this.mLayoutInflater = LayoutInflater.from(context);
     }
 
+    @NonNull
     @Override
-    public EntranceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EntranceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new EntranceViewHolder(mLayoutInflater.inflate(R.layout.item_home_entrance, null));
     }
 
     @Override
-    public void onBindViewHolder(EntranceViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull EntranceViewHolder holder, final int position) {
         /**
          * 在给View绑定显示的数据时，计算正确的position = position + mIndex * mPageSize，
          */
@@ -69,7 +71,7 @@ public class EntranceAdapter extends RecyclerView.Adapter<EntranceAdapter.Entran
             @Override
             public void onClick(View v) {
                 ModelHomeEntrance entrance = homeEntrances.get(pos);
-                // TODO: 2017/5/24 点击事件
+                Toast.makeText(mContext, entrance.getName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -89,10 +91,10 @@ public class EntranceAdapter extends RecyclerView.Adapter<EntranceAdapter.Entran
         private TextView entranceNameTextView;
         private ImageView entranceIconImageView;
 
-        public EntranceViewHolder(View itemView) {
+        EntranceViewHolder(View itemView) {
             super(itemView);
-            entranceIconImageView = (ImageView) itemView.findViewById(R.id.entrance_image);
-            entranceNameTextView = (TextView) itemView.findViewById(R.id.entrance_name);
+            entranceIconImageView = itemView.findViewById(R.id.entrance_image);
+            entranceNameTextView = itemView.findViewById(R.id.entrance_name);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth() / 4.0f));
             itemView.setLayoutParams(layoutParams);
         }
