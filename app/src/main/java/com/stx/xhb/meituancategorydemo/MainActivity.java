@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        //动态设置菜单高度，自己根据自身需求来弄
         mPageMenuLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth() / 2.0f)));
         mPageMenuLayout.setPageDatas(homeEntrances, new PageMenuViewHolderCreator() {
             @Override
