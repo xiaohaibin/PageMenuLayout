@@ -28,7 +28,7 @@ import java.util.List;
 public class PageMenuLayout<T> extends RelativeLayout {
     private static final int DEFAULT_ROW_COUNT = 2;
     private static final int DEFAULT_SPAN_COUNT = 5;
-    private ViewPager mViewPager;
+    private CustomViewPager mViewPager;
     /**
      * 行数
      */
@@ -52,8 +52,8 @@ public class PageMenuLayout<T> extends RelativeLayout {
     }
 
     private void initView(Context context, AttributeSet attrs) {
-        mViewPager = new ViewPager(context);
-        addView(mViewPager, 0);
+        mViewPager = new CustomViewPager(context);
+        addView(mViewPager, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PageMenuLayout);
         if (typedArray != null) {
             mRowCount = typedArray.getInteger(R.styleable.PageMenuLayout_pagemenu_row_count, DEFAULT_ROW_COUNT);
