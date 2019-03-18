@@ -2,6 +2,7 @@ package com.stx.xhb.pagemenulibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -57,29 +58,14 @@ public class PageMenuLayout<T> extends RelativeLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PageMenuLayout);
         if (typedArray != null) {
             mRowCount = typedArray.getInteger(R.styleable.PageMenuLayout_pagemenu_row_count, DEFAULT_ROW_COUNT);
-            mSpanCount =  typedArray.getInteger(R.styleable.PageMenuLayout_pagemenu_span_count, DEFAULT_SPAN_COUNT);
+            mSpanCount = typedArray.getInteger(R.styleable.PageMenuLayout_pagemenu_span_count, DEFAULT_SPAN_COUNT);
             typedArray.recycle();
         }
 
     }
 
-    public void setPageDatas(List<T> datas, PageMenuViewHolderCreator creator) {
-        if (datas == null) {
-            datas = new ArrayList<>();
-        }
-        int pageSize = mRowCount * mSpanCount;
-        int pageCount = (int) Math.ceil(datas.size() * 1.0 / pageSize);
-        List<View> viewList = new ArrayList<>();
-        for (int index = 0; index < pageCount; index++) {
-            RecyclerView recyclerView = new RecyclerView(this.getContext());
-            recyclerView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), mSpanCount));
-            EntranceAdapter<T> entranceAdapter = new EntranceAdapter<>(creator, datas, index, pageSize);
-            recyclerView.setAdapter(entranceAdapter);
-            viewList.add(recyclerView);
-        }
-        PageViewPagerAdapter adapter = new PageViewPagerAdapter(viewList);
-        mViewPager.setAdapter(adapter);
+    public void setPageDatas(@NonNull List<T> datas, @NonNull PageMenuViewHolderCreator creator) {
+        setPageDatas(mRowCount, mSpanCount, datas, creator);
     }
 
     /**
@@ -102,4 +88,46 @@ public class PageMenuLayout<T> extends RelativeLayout {
             mViewPager.addOnPageChangeListener(pageListener);
         }
     }
+
+    /**
+     * 设置行数
+     * @param rowCount
+     */
+    public void setRowCount(int rowCount) {
+        mRowCount = rowCount;
+    }
+
+    /**
+     * 设置列数
+     * @param spanCount
+     */
+    public void setSpanCount(int spanCount) {
+        mSpanCount = spanCount;
+    }
+
+    public void setPageDatas(int rowCount, int spanCount, @NonNull List<T> datas, @NonNull PageMenuViewHolderCreator creator) {
+        if (datas == null) {
+            datas = new ArrayList<>();
+        }
+        mRowCount = rowCount;
+        mSpanCount = spanCount;
+        if (mRowCount == 0 || mSpanCount == 0) {
+            return;
+        }
+        int pageSize = mRowCount * mSpanCount;
+        int pageCount = (int) Math.ceil(datas.size() * 1.0 / pageSize);
+        List<View> viewList = new ArrayList<>();
+        for (int index = 0; index < pageCount; index++) {
+            RecyclerView recyclerView = new RecyclerView(this.getContext());
+            recyclerView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), mSpanCount));
+            EntranceAdapter<T> entranceAdapter = new EntranceAdapter<>(creator, datas, index, pageSize);
+            recyclerView.setAdapter(entranceAdapter);
+            viewList.add(recyclerView);
+        }
+        PageViewPagerAdapter adapter = new PageViewPagerAdapter(viewList);
+        mViewPager.setAdapter(adapter);
+    }
+
+
 }
