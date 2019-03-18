@@ -69,7 +69,7 @@ dependencies {
     }
 
     private void init() {
-        mPageMenuLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth() / 2.0f)));
+     
         mPageMenuLayout.setPageDatas(homeEntrances, new PageMenuViewHolderCreator() {
             @Override
             public AbstractHolder createHolder(View itemView) {
